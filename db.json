@@ -1,11 +1,11 @@
 {
   "logs": [
     {
+      "id": 1,
       "message": "Changed Network card in server 003",
       "attention": false,
-      "tech": "John Doe",
-      "date": "2020-03-16T19:27:07.166Z",
-      "id": 1
+      "tech": "Sarah Wilson",
+      "date": "2020-03-16T20:59:23.177Z"
     },
     {
       "message": "Computer 005-2 needs repair in room 34-2",
@@ -20,28 +20,35 @@
       "attention": false,
       "tech": "John Doe",
       "date": "2020-03-16T20:09:15.467Z"
+    },
+    {
+      "message": "New Display required for accounts",
+      "attention": false,
+      "tech": "Conor Walsh",
+      "date": "2020-03-16T20:57:01.468Z",
+      "id": 5
     }
   ],
   "techs": [
     {
-      "id": 1,
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    {
-      "id": 2,
-      "firstname": "Sam",
-      "lastname": "Smith"
-    },
-    {
       "id": 3,
-      "firstname": "Sarah",
-      "lastname": "Wilson"
+      "firstName": "Sarah",
+      "lastName": "Wilson"
     },
     {
-      "firstname": "Conor",
-      "lastname": "Walsh",
+      "firstName": "John",
+      "lastName": "Doe",
       "id": 4
+    },
+    {
+      "firstName": "Sam",
+      "lastName": "Smith",
+      "id": 5
+    },
+    {
+      "firstName": "Conor",
+      "lastName": "Walsh",
+      "id": 6
     }
   ]
 }
