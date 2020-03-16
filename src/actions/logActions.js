@@ -1,4 +1,13 @@
-import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG, DELETE_LOG } from "./types";
+import {
+  GET_LOGS,
+  SET_LOADING,
+  LOGS_ERROR,
+  ADD_LOG,
+  DELETE_LOG,
+  SET_CURRENT,
+  CLEAR_CURRENT,
+  UPDATE_LOG
+} from "./types";
 
 // export const getLogs = () => {
 //   return async dispatch => {
@@ -40,7 +49,7 @@ export const addLog = log => async dispatch => {
     setLoading();
 
     const res = await fetch("/logs", {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(log),
       headers: {
         "Content-Type": "application/json"
@@ -61,17 +70,43 @@ export const addLog = log => async dispatch => {
 };
 
 // Delete log from server
-export const deleteLog = (id) => async dispatch => {
+export const deleteLog = id => async dispatch => {
+  try {
+    setLoading();
+
+    await fetch(`/logs/${id}`, {
+      method: "DELETE"
+    });
+
+    dispatch({
+      type: DELETE_LOG,
+      payload: id
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: error.response.data
+    });
+  }
+};
+
+// Update log from server
+export const updateLog = log => async dispatch => {
     try {
       setLoading();
   
-      await fetch(`/logs/${id}`, {
-          method: 'DELETE'
+      const res =  await fetch(`/logs/${log.id}`, {
+        method: "PUT",
+        body: JSON.stringify(log),
+        headers: {
+            'Content-Type': 'application/json'
+        }
       });
-        
+      
+      const data = await res.json()
       dispatch({
-        type: DELETE_LOG,
-        payload: id
+        type: UPDATE_LOG,
+        payload: data
       });
     } catch (error) {
       dispatch({
@@ -80,6 +115,21 @@ export const deleteLog = (id) => async dispatch => {
       });
     }
   };
+
+// Set current log
+export const setCurrent = log => {
+  return {
+    type: SET_CURRENT,
+    payload: log
+  };
+};
+
+// Clear current log
+export const clearCurrent = () => {
+  return {
+    type: CLEAR_CURRENT
+  };
+};
 
 // Set loading to true
 export const setLoading = () => {
